@@ -2,13 +2,13 @@
 
     class HomeController{
 
-        public function login(){
+        public static function login(){
 
             session_start();
 
         }
 
-        public function logout(){
+        public static function logout(){
 
             session_start();
 

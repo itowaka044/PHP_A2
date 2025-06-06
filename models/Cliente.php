@@ -1,10 +1,11 @@
 <?php
 
+namespace models;
+
 class Cliente{
 
     public int $id;
     public string $nome;
-    public string $senha;
     public string $cpf;
     public string $telefone;
 
@@ -14,8 +15,10 @@ class Cliente{
         $this->telefone = $telefone;
     }
 
+    public function getId() : int{
+        return $this->id;
+    }
     
-
 }
 
 ?>

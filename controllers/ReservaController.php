@@ -1,30 +1,47 @@
 <?php
 
+    use models\Cliente;
+    use models\Reserva;
     class ReservaController{
+        
+        public static function index(){
 
-
-        public int $id;
-    public Cliente $cliente;
-    public string $data;
-
-        public function index(){
+            Header("Location: views/reserva.php");
 
         }
 
-        public function marcarReserva(){
-            
+        public static function marcarReserva(){
+
+            if($_SERVER['REQUEST_METHOD'] == "POST"){
+
+                $nome = $_POST['clienteNome'];
+                $cpf = $_POST['clienteCpf'];
+                $telefone = $_POST['clienteTelefone'];
+                $data = $_POST['reservaData'];
+                
+                try{
+
+                    $cliente = new Cliente($nome, $cpf, $telefone);
+                    
+                    Reserva::marcarReserva($cliente, $data);
+
+                } catch (Exception $exception){
+
+                    echo "erro: " . $exception->getMessage();
+
+                }
+            }
+        }
+
+        public static function consultarReserva(){
 
         }
 
-        public function consultarReserva(){
+        public static function desmarcarReserva(){
 
         }
 
-        public function desmarcarReserva(){
-
-        }
-
-        public function editarReserva(){
+        public static function editarReserva(){
             
         }
 

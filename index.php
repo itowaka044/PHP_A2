@@ -9,7 +9,6 @@ if (isset($url[1])) {
 }
 
 require __DIR__ . '/controllers/HomeController.php';
-require __DIR__ . '/controllers/ClienteController.php';
 require __DIR__ . '/controllers/ReservaController.php';
 
 match($pagina){
@@ -19,11 +18,8 @@ match($pagina){
     'reserva'    => ReservaController::index(),
     'reserva/marcar'  => ReservaController::marcarReserva(),
     'reserva/consultar' => ReservaController::consultarReserva(),
-    'reserva/desmarcar' => ReservaControler::desmarcarReserva(),
+    'reserva/desmarcar' => ReservaController::desmarcarReserva(),
     'reserva/editar'    => ReservaController::editarReserva(),
-
-    'cliente/cadastrar' => ClienteController::cadastrarCliente(),
-    'cliente/apagarCliente' => ClienteController::apagarCliente(),
 
     default => ReservaController::index()
 };

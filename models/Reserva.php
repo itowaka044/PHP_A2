@@ -17,7 +17,7 @@ class Reserva{
         $this->data = $data;    
     }
 
-    public function marcarReserva(Cliente $cliente, string $data){
+    public static function marcarReserva(Cliente $cliente, string $data){
         $reserva = new Reserva($cliente, $data);
 
         $db = DbConfig::getConn();
