@@ -21,16 +21,21 @@ class Reserva{
         $reserva = new Reserva($cliente, $data);
 
         $db = DbConfig::getConn();
+
+        //var_dump($db);
+
         $statement = $db->prepare("insert into reservas(clienteNome, clienteCpf, clienteTelefone , reservaData) 
         values (:clienteNome, :clienteCpf, :clienteTelefone, :reservaData)");
 
-        $statement->bindValue(":clienteNome", $reserva->cliente->id);
+        // var_dump($statement);
+        // die;
+
+        $statement->bindValue(":clienteNome", $reserva->cliente->nome);
         $statement->bindValue(":clienteCpf", $reserva->cliente->cpf);
         $statement->bindValue(":clienteTelefone", $reserva->cliente->telefone);
-        $statement->bindValue(":reservaData", $reserva);
+        $statement->bindValue(":reservaData", $data);
 
         return $statement->execute();
-
     }
 
     public function consultarReserva(){

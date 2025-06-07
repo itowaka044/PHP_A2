@@ -1,4 +1,4 @@
-<form action="" method="post">
+<form action="http://localhost/PHP_A2/reserva/marcar" method="post">
     <br>
     <p>nome</p>
     <input type="text" name="clienteNome">
@@ -10,7 +10,7 @@
     <input type="text" name="clienteTelefone">
     <br>
     <p>data</p>
-    <input type="date" name="ReservaData">
+    <input type="date" name="reservaData">
     <br><br>
     <input type="submit">
 </form>

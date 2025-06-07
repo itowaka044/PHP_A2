@@ -1,15 +1,25 @@
 <?php
 
-$url = $_GET['url'] ?? null;
-$url = explode("/", $url);
-$pagina =  $url[0];
+use controllers\ReservaController;
+require_once __DIR__ . '/controllers/HomeController.php';
+require_once __DIR__ . '/controllers/ReservaController.php';
+require_once __DIR__ . '/models/Cliente.php';
+require_once __DIR__ . '/models/Reserva.php';
+require_once __DIR__ . '/DbConfig.php';
 
-if (isset($url[1])) {
-    $pagina = "{$url[0]}/$url[1]";
-}
+$uri = $_SERVER['REQUEST_URI'];
 
-require __DIR__ . '/controllers/HomeController.php';
-require __DIR__ . '/controllers/ReservaController.php';
+$urlBase = '/PHP_A2'; 
+
+$urlAlterado = str_replace($urlBase, '', parse_url($uri, PHP_URL_PATH));
+
+$pagina = trim($urlAlterado, '/');
+
+// echo $uri . "<br>";
+// echo $urlBase . "<br>";
+// echo $urlAlterado . "<br>";
+// echo var_dump($pagina);
+// die;
 
 match($pagina){
     'login'     => HomeController::login(),
@@ -20,6 +30,8 @@ match($pagina){
     'reserva/consultar' => ReservaController::consultarReserva(),
     'reserva/desmarcar' => ReservaController::desmarcarReserva(),
     'reserva/editar'    => ReservaController::editarReserva(),
+
+    '' => ReservaController::index(),
 
     default => ReservaController::index()
 };
