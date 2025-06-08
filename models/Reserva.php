@@ -49,6 +49,18 @@ class Reserva{
         return $reservas->fetchAll();
     }
 
+    public static function consultarReservaPorId($id){
+
+        $db = DbConfig::getConn();
+
+        $statement = $db->prepare("select * from reservas where clienteId = :id");
+        
+        $statement->execute(['clienteId' => $id]);
+
+        return $statement->fetch();
+
+    }
+
     public function editarReserva(){
 
         return;

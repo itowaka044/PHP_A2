@@ -18,6 +18,8 @@ foreach($reservas as $reserva){
 
 ?>
 
+<p>___________________________________________________________________</p>
+
 <form action="http://localhost/PHP_A2/reserva/marcar" method="post">
     <br>
     <p>nome</p>
@@ -35,3 +37,5 @@ foreach($reservas as $reserva){
     <input type="submit">
     <br><br>
 </form>
+
+<p>___________________________________________________________________</p>

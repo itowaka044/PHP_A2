@@ -4,6 +4,7 @@
 
     require_once __DIR__ . '/../models/Reserva.php';
 
+    use DbConfig;
     use Exception;
     use models\Cliente;
     use models\Reserva;
@@ -51,6 +52,16 @@
             } catch(Exception $exception){
                 echo "erro: ". $exception->getMessage();
             }
+        }
+        public static function consultarReservaPorId($id){
+                try{
+                    $reserva = Reserva::consultarReservaPorId($id);
+
+                    return $reserva;
+                    
+                } catch(Exception $exception){
+                    echo "erro: ". $exception->getMessage();
+                }
         }
 
         public static function desmarcarReserva(){
