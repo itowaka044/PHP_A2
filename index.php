@@ -1,11 +1,12 @@
 <?php
 
-use controllers\ReservaController;
 require_once __DIR__ . '/controllers/HomeController.php';
 require_once __DIR__ . '/controllers/ReservaController.php';
 require_once __DIR__ . '/models/Cliente.php';
 require_once __DIR__ . '/models/Reserva.php';
 require_once __DIR__ . '/DbConfig.php';
+
+use controllers\ReservaController;
 
 $uri = $_SERVER['REQUEST_URI'];
 
@@ -22,10 +23,12 @@ $pagina = trim($urlAlterado, '/');
 // die;
 
 match($pagina){
+
+    'teste'    => ReservaController::index(),
+
     'login'     => HomeController::login(),
     'logout'    => HomeController::logout(),
 
-    'reserva'    => ReservaController::index(),
     'reserva/marcar'  => ReservaController::marcarReserva(),
     'reserva/consultar' => ReservaController::consultarReserva(),
     'reserva/desmarcar' => ReservaController::desmarcarReserva(),

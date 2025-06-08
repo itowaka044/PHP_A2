@@ -2,7 +2,7 @@
 
 namespace models;
 
-require_once "DbConfig.php";
+require_once __DIR__ . "/../DbConfig.php";
 
 use models\Cliente;
 

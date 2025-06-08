@@ -11,7 +11,7 @@
 
         public static function index(){
 
-            Header("Location: views/reserva.php");
+            Header("Location: /PHP_A2/tests/testeMain.php");
 
         }
 
@@ -30,7 +30,7 @@
                     
                     Reserva::marcarReserva($cliente, $data);
 
-                    Header("Location: /PHP_A2/views/reservaConfirmada.php");
+                    Header("Location: /PHP_A2/tests/testReservaConfirmada.php");
                     die;
 
                 } catch (Exception $exception){
