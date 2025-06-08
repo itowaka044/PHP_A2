@@ -2,6 +2,8 @@
 
 namespace models;
 
+require_once "DbConfig.php";
+
 use models\Cliente;
 
 use DbConfig;
@@ -38,10 +40,13 @@ class Reserva{
         return $statement->execute();
     }
 
-    public function consultarReserva(){
+    public static function consultarReserva(){
 
         $db = DbConfig::getConn();
-        return $db->query("select * from reserva");
+        
+        $reservas = $db->query("select * from reservas");
+
+        return $reservas->fetchAll();
     }
 
     public function editarReserva(){

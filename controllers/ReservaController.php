@@ -1,10 +1,14 @@
 <?php
+
     namespace controllers;
 
+    require_once __DIR__ . '/../models/Reserva.php';
+
+    use Exception;
     use models\Cliente;
     use models\Reserva;
     class ReservaController{
-        
+
         public static function index(){
 
             Header("Location: views/reserva.php");
@@ -26,6 +30,9 @@
                     
                     Reserva::marcarReserva($cliente, $data);
 
+                    Header("Location: /PHP_A2/views/reservaConfirmada.php");
+                    die;
+
                 } catch (Exception $exception){
 
                     echo "erro: " . $exception->getMessage();
@@ -34,8 +41,16 @@
             }
         }
 
-        public static function consultarReserva(){
+        public static function consultarReservas(){
 
+            try{
+                $reservas = Reserva::consultarReserva();
+
+                return $reservas;
+
+            } catch(Exception $exception){
+                echo "erro: ". $exception->getMessage();
+            }
         }
 
         public static function desmarcarReserva(){
