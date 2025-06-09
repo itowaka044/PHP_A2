@@ -30,11 +30,8 @@ match($pagina){
     'logout'    => HomeController::logout(),
 
     'reserva/marcar'  => ReservaController::marcarReserva(),
-    'reserva/consultar' => ReservaController::consultarReserva(),
-
+    'reserva/consultar' => ReservaController::consultarReservas(),
     'reserva/consultar-id' => ReservaController::consultarReservaPorId(),
-    //para usar este endpoint, tem que usar ex: ?id=1 no final da url
-
     'reserva/desmarcar' => ReservaController::desmarcarReserva(),
     'reserva/editar'    => ReservaController::editarReserva(),
 
