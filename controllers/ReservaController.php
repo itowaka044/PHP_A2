@@ -36,7 +36,7 @@
 
                 } catch (Exception $exception){
 
-                    echo "erro: " . $exception->getMessage();
+                    echo "erro: " . $exception->getMessage() . "<br>";
 
                 }
             }
@@ -50,18 +50,28 @@
                 return $reservas;
 
             } catch(Exception $exception){
-                echo "erro: ". $exception->getMessage();
+                echo "erro: ". $exception->getMessage() . "<br>";
             }
         }
-        public static function consultarReservaPorId($id){
-                try{
-                    $reserva = Reserva::consultarReservaPorId($id);
-
-                    return $reserva;
-                    
-                } catch(Exception $exception){
-                    echo "erro: ". $exception->getMessage();
+        public static function consultarReservaPorId(){
+            try {
+                if (!isset($_GET['id'])) {
+                    echo "ID da reserva não informado.";
+                    return;
                 }
+
+                $id = $_GET['id'];
+
+                $reserva = Reserva::consultarReservaPorId($id);
+
+                if ($reserva) {
+                    include '/tests/testReservaPorId.php';
+                } else {
+                    echo "Reserva não encontrada.";
+                }
+            } catch (Exception $exception) {
+                echo "erro: " . $exception->getMessage() . "<br>";
+            }
         }
 
         public static function desmarcarReserva(){

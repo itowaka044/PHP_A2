@@ -1,6 +1,6 @@
 <?php
 
-namespace views;
+namespace tests;
 
 require_once 'C:\xampp\htdocs\PHP_A2\controllers\ReservaController.php';
 
@@ -39,3 +39,4 @@ foreach($reservas as $reserva){
 </form>
 
 <p>___________________________________________________________________</p>
+

@@ -6,6 +6,8 @@ require_once __DIR__ . "/../DbConfig.php";
 
 use models\Cliente;
 
+use PDO;
+
 use DbConfig;
 
 class Reserva{
@@ -54,8 +56,10 @@ class Reserva{
         $db = DbConfig::getConn();
 
         $statement = $db->prepare("select * from reservas where clienteId = :id");
+
+        $statement->bindParam(':id', $id, PDO::PARAM_INT);
         
-        $statement->execute(['clienteId' => $id]);
+        $statement->execute();
 
         return $statement->fetch();
 
