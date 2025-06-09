@@ -1,6 +1,7 @@
 <?php
 
 class DbConfig {
+    
     private static $conn;
 
     public static function getConn() {

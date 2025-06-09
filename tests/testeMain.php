@@ -38,5 +38,19 @@ foreach($reservas as $reserva){
     <br><br>
 </form>
 
-<p>___________________________________________________________________</p>
+
+<!-- <p>___________________________________________________________________</p>
+
+<form action="http://localhost/PHP_A2/reserva/editar" method="post">
+    <input type="hidden" name="clienteId" value=" <?=$reserva['clienteId']?>">
+    <p>Editar Nome:</p>
+    <input type="text" name="clienteNome" value=" <?=$reserva['clienteNome']?>">
+    <p>Editar Telefone:</p>
+    <input type="text" name="clienteTelefone" value=" <?=$reserva['clienteTelefone']?>">
+    <p>Editar Data:</p>
+    <input type="date" name="reservaData" value=" <?=$reserva['reservaData']?>">
+    <br><br>
+    <input type="submit" value="ReservaController">
+</form>
+<p>___________________________________________________________________</p> -->
 

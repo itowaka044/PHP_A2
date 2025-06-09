@@ -12,6 +12,8 @@ $uri = $_SERVER['REQUEST_URI'];
 
 $urlBase = '/PHP_A2'; 
 
+
+
 $urlAlterado = str_replace($urlBase, '', parse_url($uri, PHP_URL_PATH));
 
 $pagina = trim($urlAlterado, '/');

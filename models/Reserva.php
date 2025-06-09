@@ -65,8 +65,24 @@ class Reserva{
 
     }
 
-    public function editarReserva(){
+    public function editarReserva(/*$id, $reserva*/){
 
+        // $db = DbConfig::getConn();
+
+        // $statement = $db->prepare("UPDATE reservas SET clienteNome = :newNome, clienteTelefone = :newTelefone, reservaData = :newData WHERE reservas.clienteId = :id;");
+
+        // $newNome = $reserva->cliente->nome;
+        // $newTelefone = $reserva->cliente->telefone;
+        // $newData = $reserva->data;
+
+        // $statement->bindParam(':newNome', $newNome, PDO::PARAM_STR);
+        // $statement->bindParam(':newTelefone', $newTelefone, PDO::PARAM_STR);
+        // $statement->bindParam(':newData', $newData, PDO::PARAM_STR);
+        // $statement->bindParam(':id', $id, PDO::PARAM_INT);
+        
+        // $statement->execute();
+
+        // return $statement->fetch();
         return;
     }
 
