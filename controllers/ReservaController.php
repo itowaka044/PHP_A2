@@ -24,12 +24,13 @@
                 $cpf = $_POST['clienteCpf'];
                 $telefone = $_POST['clienteTelefone'];
                 $data = $_POST['reservaData'];
+                $quadraId = $_POST['quadraId'];
                 
                 try{
 
                     $cliente = new Cliente($nome, $cpf, $telefone);
                     
-                    Reserva::marcarReserva($cliente, $data);
+                    Reserva::marcarReserva($cliente, $data, $quadraId);
 
                     Header("Location: /PHP_A2/tests/testReservaConfirmada.php");
                     die;
