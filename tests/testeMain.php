@@ -13,7 +13,8 @@ foreach($reservas as $reserva){
     echo "id: " . $reserva['clienteId'] . "<br>";
     echo "nome: " . $reserva['clienteNome'] . "<br>";
     echo "telefone: " . $reserva['clienteTelefone'] . "<br>" ;
-    echo "data da reserva: " . $reserva['reservaData'] . "<br><br>";
+    echo "data da reserva: " . $reserva['reservaData'] . "<br>";
+    echo "quadra id: " . $reserva['quadraId'] . "<br><br>";
 }
 
 ?>
@@ -33,6 +34,13 @@ foreach($reservas as $reserva){
     <br>
     <p>data</p>
     <input type="date" name="reservaData">
+    <br><br>
+    <p>tipo de quadra</p>
+    <select name="quadraId" id="cars">
+        <option value="1">society aberta</option>
+        <option value="2">society coberta</option>
+        <option value="3">futsal coberta</option>
+    </select>
     <br><br>
     <input type="submit">
     <br><br>

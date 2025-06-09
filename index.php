@@ -10,9 +10,11 @@ use controllers\ReservaController;
 
 $uri = $_SERVER['REQUEST_URI'];
 
-$urlBase = '/PHP_A2'; 
+$urlBase = '/PHP_A2';
 
-$urlAlterado = str_replace($urlBase, '', parse_url($uri, PHP_URL_PATH));
+$urlSeparada = parse_url($uri, PHP_URL_PATH);
+
+$urlAlterado = str_replace($urlBase, '', $urlSeparada);
 
 $pagina = trim($urlAlterado, '/');
 
