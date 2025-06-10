@@ -13,9 +13,19 @@ use DbConfig;
 class Reserva{
 
     public int $id;
+    
     public Cliente $cliente;
+
     public string $data;
+
+    public string $horaInicio;
+
+    public string $horaFim;
+
     public Quadra $quadra;
+
+    public bool $reservado;
+    
 
     public function __construct(Cliente $cliente, string $data){
         $this->cliente = $cliente;
@@ -23,17 +33,17 @@ class Reserva{
     }
 
 
-    private function reservarQuadra($quadraId){
+    private static function reservarQuadra($quadraId){
 
         $db = DbConfig::getConn();
 
-        $statement = $db->prepare("update reservado set reservado = false where quadraId = :id");
+        $statement = $db->prepare("update reservado set reservado = true where quadraId = :id");
 
         $statement->bindParam(":id", $quadraId, PDO::PARAM_INT);
 
     }
 
-    private function quadraEstaReservada($quadraId){
+    private static function quadraEstaReservada($quadraId){
 
         $db = DbConfig::getConn();
 
@@ -44,47 +54,47 @@ class Reserva{
         return $statement;
     }
 
-    public static function marcarReserva(Cliente $cliente, string $data, $quadraId){
-        $reserva = new Reserva($cliente, $data);
+   public static function marcarReserva(Cliente $cliente, string $data, $quadraId){
+       $reserva = new Reserva($cliente, $data);
 
-        $db = DbConfig::getConn();
+       $db = DbConfig::getConn();
 
-        //var_dump($db);
+       //var_dump($db);
 
-        $statement = $db->prepare("insert into reservas(clienteNome, clienteCpf, clienteTelefone , reservaData, quadraId) 
-        values (:clienteNome, :clienteCpf, :clienteTelefone, :reservaData, :quadraId)");
+       $statement = $db->prepare("insert into reservas(clienteNome, clienteCpf, clienteTelefone , reservaData, quadraId) 
+       values (:clienteNome, :clienteCpf, :clienteTelefone, :reservaData, :quadraId)");
 
-        // var_dump($statement);
-        // die;
+       // var_dump($statement);
+       // die;
 
-        $statement->bindValue(":clienteNome", $reserva->cliente->nome);
-        $statement->bindValue(":clienteCpf", $reserva->cliente->cpf);
-        $statement->bindValue(":clienteTelefone", $reserva->cliente->telefone);
-        $statement->bindValue(":reservaData", $data);
-        $statement->bindValue(":quadraId", $quadraId);
+       $statement->bindValue(":clienteNome", $reserva->cliente->nome);
+       $statement->bindValue(":clienteCpf", $reserva->cliente->cpf);
+       $statement->bindValue(":clienteTelefone", $reserva->cliente->telefone);
+       $statement->bindValue(":reservaData", $data);
+       $statement->bindValue(":quadraId", $quadraId);
 
 
-        $isReservada = $this->quadraEstaReservada($quadraId);
+       $isReservada = self::quadraEstaReservada($quadraId);
 
-        if($isReservada){
+       if($isReservada){
 
-            $this->reservarQuadra($quadraId);
+           self::reservarQuadra($quadraId);
 
-            return $statement->execute();
+           return $statement->execute();
 
-        }
+       }
 
-        return false;
-        
-    }
+       return false;
+    
+   }
 
     public static function consultarReserva(){
 
         $db = DbConfig::getConn();
         
-        $reservas = $db->query("select * from reservas");
+        $statement = $db->query("select * from reservas");
 
-        return $reservas->fetchAll();
+        return $statement->fetchAll();
     }
 
     public static function consultarReservaPorId($id){
@@ -95,6 +105,20 @@ class Reserva{
 
         $statement->bindParam(':id', $id, PDO::PARAM_INT);
         
+        $statement->execute();
+
+        return $statement->fetch();
+
+    }
+
+    public static function consultarQuadras($id){
+
+        $db = DbConfig::getConn();
+
+        $statement = $db->prepare("select * from quadra where quadraId = :id");
+
+        $statement->bindparam(':id', $id, PDO::PARAM_INT);
+
         $statement->execute();
 
         return $statement->fetch();

@@ -3,14 +3,23 @@
     namespace controllers;
 
     require_once __DIR__ . '/../models/Reserva.php';
+    require_once __DIR__ . '/../models/Quadra.php';
 
     use DbConfig;
+
     use Exception;
+
     use models\Cliente;
+
+    use models\Quadra;
+
     use models\Reserva;
+
     class ReservaController{
 
         public static function index(){
+
+            Quadra::criarQuadrasDb();
 
             Header("Location: /PHP_A2/tests/testeMain.php");
 
@@ -73,6 +82,19 @@
             } catch (Exception $exception) {
                 echo "erro: " . $exception->getMessage() . "<br>";
             }
+        }
+
+        public static function consultarQuadra($id){
+
+            // try{
+
+            //     $ = Reserva::consultarQuadra($id);
+
+
+
+            // }
+
+
         }
 
         public static function desmarcarReserva(){
