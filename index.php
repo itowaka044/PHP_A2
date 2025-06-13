@@ -12,15 +12,14 @@ $uri = $_SERVER['REQUEST_URI'];
 
 $urlBase = '/PHP_A2';
 
-<<<<<<< HEAD
 
 
 $urlAlterado = str_replace($urlBase, '', parse_url($uri, PHP_URL_PATH));
-=======
+
 $urlSeparada = parse_url($uri, PHP_URL_PATH);
 
 $urlAlterado = str_replace($urlBase, '', $urlSeparada);
->>>>>>> 0d3df0328be8079b8e3ccfa1a101ca1d167724fc
+
 
 $pagina = trim($urlAlterado, '/');
 

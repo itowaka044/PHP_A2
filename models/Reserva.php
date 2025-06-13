@@ -5,57 +5,48 @@ namespace models;
 require_once __DIR__ . "/../DbConfig.php";
 
 use models\Cliente;
-
 use PDO;
-
 use DbConfig;
 
-class Reserva{
+class Reserva {
 
     public int $id;
     public Cliente $cliente;
     public string $data;
     public Quadra $quadra;
 
-    public function __construct(Cliente $cliente, string $data){
+    public function __construct(Cliente $cliente, string $data) {
         $this->cliente = $cliente;
         $this->data = $data;
     }
 
-
-    private function reservarQuadra($quadraId){
-
+    private static function reservarQuadra($quadraId) {
         $db = DbConfig::getConn();
-
-        $statement = $db->prepare("update reservado set reservado = false where quadraId = :id");
-
+        $statement = $db->prepare("UPDATE quadra SET reservado = false WHERE quadraId = :id");
         $statement->bindParam(":id", $quadraId, PDO::PARAM_INT);
-
+        $statement->execute();
     }
 
-    private function quadraEstaReservada($quadraId){
-
+    private static function quadraEstaReservada($quadraId) {
         $db = DbConfig::getConn();
-
-        $statement = $db->prepare("select reservado from quadra where quadraId = :id");
-
+        $statement = $db->prepare("SELECT reservado FROM quadra WHERE quadraId = :id");
         $statement->bindParam(":id", $quadraId, PDO::PARAM_INT);
-
-        return $statement;
+        $statement->execute();
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+        return isset($result['reservado']) && $result['reservado'];
     }
 
-    public static function marcarReserva(Cliente $cliente, string $data, $quadraId){
+    public static function marcarReserva(Cliente $cliente, string $data, $quadraId) {
         $reserva = new Reserva($cliente, $data);
-
         $db = DbConfig::getConn();
 
-        //var_dump($db);
+        if (self::quadraEstaReservada($quadraId)) {
+            // Quadra já está reservada, não pode reservar novamente
+            return false;
+        }
 
-        $statement = $db->prepare("insert into reservas(clienteNome, clienteCpf, clienteTelefone , reservaData, quadraId) 
-        values (:clienteNome, :clienteCpf, :clienteTelefone, :reservaData, :quadraId)");
-
-        // var_dump($statement);
-        // die;
+        $statement = $db->prepare("INSERT INTO reservas(clienteNome, clienteCpf, clienteTelefone, reservaData, quadraId) 
+            VALUES (:clienteNome, :clienteCpf, :clienteTelefone, :reservaData, :quadraId)");
 
         $statement->bindValue(":clienteNome", $reserva->cliente->nome);
         $statement->bindValue(":clienteCpf", $reserva->cliente->cpf);
@@ -63,70 +54,39 @@ class Reserva{
         $statement->bindValue(":reservaData", $data);
         $statement->bindValue(":quadraId", $quadraId);
 
+        $result = $statement->execute();
 
-        $isReservada = $this->quadraEstaReservada($quadraId);
-
-        if($isReservada){
-
-            $this->reservarQuadra($quadraId);
-
-            return $statement->execute();
-
+        if ($result) {
+            self::reservarQuadra($quadraId);
+            return true;
         }
 
         return false;
-        
     }
 
-    public static function consultarReserva(){
-
+    public static function consultarReserva() {
         $db = DbConfig::getConn();
-        
-        $reservas = $db->query("select * from reservas");
-
-        return $reservas->fetchAll();
+        $reservas = $db->query("SELECT * FROM reservas");
+        return $reservas->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public static function consultarReservaPorId($id){
-
+    public static function consultarReservaPorId($id) {
         $db = DbConfig::getConn();
-
-        $statement = $db->prepare("select * from reservas where clienteId = :id");
-
+        $statement = $db->prepare("SELECT * FROM reservas WHERE clienteId = :id");
         $statement->bindParam(':id', $id, PDO::PARAM_INT);
-        
         $statement->execute();
-
-        return $statement->fetch();
-
+        return $statement->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function editarReserva(/*$id, $reserva*/){
-
-        // $db = DbConfig::getConn();
-
-        // $statement = $db->prepare("UPDATE reservas SET clienteNome = :newNome, clienteTelefone = :newTelefone, reservaData = :newData WHERE reservas.clienteId = :id;");
-
-        // $newNome = $reserva->cliente->nome;
-        // $newTelefone = $reserva->cliente->telefone;
-        // $newData = $reserva->data;
-
-        // $statement->bindParam(':newNome', $newNome, PDO::PARAM_STR);
-        // $statement->bindParam(':newTelefone', $newTelefone, PDO::PARAM_STR);
-        // $statement->bindParam(':newData', $newData, PDO::PARAM_STR);
-        // $statement->bindParam(':id', $id, PDO::PARAM_INT);
-        
-        // $statement->execute();
-
-        // return $statement->fetch();
+    public function editarReserva() {
+        // Implementação futura
         return;
     }
 
-    public function desmarcarReserva($id){
+    public function desmarcarReserva($id) {
         $db = DbConfig::getConn();
-        return $db->query("delete from reserva where id='$id')");
+        return $db->query("DELETE FROM reservas WHERE id = '$id'");
     }
-
 }
 
 ?>

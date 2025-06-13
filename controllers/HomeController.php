@@ -1,32 +1,33 @@
 <?php
-
     class HomeController{
 
-        public static function login(){
+    public static function login() {
+        require_once __DIR__ . '/../models/Usuario.php';
 
-            require_once "DbConfig.php";
+        if($_SERVER['REQUEST_METHOD'] === 'POST'){
+
+            $usuario = $_POST['username'] ?? null;
+            $senha = $_POST['password'] ?? null;
+            $passwordHash = password_hash($senha, PASSWORD_DEFAULT);
             session_start();
 
-            // if(is_null($usuarioId)){
 
-            //     if($_SERVER['REQUEST_METHOD'] === 'POST'){
-            //         $usuario_formulario = $_POST['usuario'] ?? null;
-            //         $senha_formulario = $_POST['senha'] ?? null;
-            //     }
-            // }else{
-            //     header("Location:/tests/testeMain.php");
-            // }
+            if(!is_null($usuario) && !is_null($senha)){
+                if(Usuario::autenticador($usuario, $senha)){
+                    header("Location: fornecedores");
+                }
+            }
+
         }
-
-            public static function logout(){
+        
+        require __DIR__ . '/../views/login.php';
+    }
+        public static function logout(){
 
                 session_start();
-
-
-                session_destroy();
-                
-                header("Location:");
-            }
+        }   
     }
+    header("Location:");
+
 
 ?>
