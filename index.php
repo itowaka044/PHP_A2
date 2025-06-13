@@ -7,39 +7,44 @@ require_once __DIR__ . '/models/Reserva.php';
 require_once __DIR__ . '/DbConfig.php';
 
 use controllers\ReservaController;
+use controllers\HomeController;
 
 $uri = $_SERVER['REQUEST_URI'];
-
-$urlBase = '/PHP_A2';
-
+$urlBase = '/PHP_A2'; 
 $urlSeparada = parse_url($uri, PHP_URL_PATH);
-
 $urlAlterado = str_replace($urlBase, '', $urlSeparada);
-
 $pagina = trim($urlAlterado, '/');
 
+// Descomente para depuração
 // echo $uri . "<br>";
 // echo $urlBase . "<br>";
 // echo $urlAlterado . "<br>";
 // echo var_dump($pagina);
 // die;
 
-match($pagina){
+// Roteamento
+match($pagina) {
 
-    'teste'    => ReservaController::index(),
+    // Página de testes
+    'teste' => ReservaController::index(),
 
-    'login'     => HomeController::login(),
-    'logout'    => HomeController::logout(),
+    // Página inicial
+    '', 
+    'home' => HomeController::home(),
 
-    'reserva/marcar'  => ReservaController::marcarReserva(),
-    'reserva/consultar' => ReservaController::consultarReservas(),
-    'reserva/consultar-id' => ReservaController::consultarReservaPorId(),
-    'reserva/desmarcar' => ReservaController::desmarcarReserva(),
-    'reserva/editar'    => ReservaController::editarReserva(),
+    // Login/Logout
+    'login' => HomeController::login(),
+    'logout' => HomeController::logout(),
 
-    '' => ReservaController::index(),
+    // Funcionalidades de reserva
+    'reserva/marcar'        => ReservaController::marcarReserva(),
+    'reserva/consultar'     => ReservaController::consultarReservas(),
+    'reserva/consultar-id'  => ReservaController::consultarReservaPorId(),
+    'reserva/desmarcar'     => ReservaController::desmarcarReserva(),
+    'reserva/editar'        => ReservaController::editarReserva(),
 
-    default => ReservaController::index()
+    // Rota padrão
+    default => HomeController::home()
 };
 
 ?>
