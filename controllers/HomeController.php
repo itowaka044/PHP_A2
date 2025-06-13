@@ -22,12 +22,16 @@
         
         require __DIR__ . '/../views/login.php';
     }
-        public static function logout(){
 
-                session_start();
-        }   
+    public static function logout() {
+        unset($_SESSION['user_id']);
+        unset($_SESSION['user']);
+        session_destroy();
+        
+        header('Location: login');
+        exit;
     }
-    header("Location:");
+}
 
 
 ?>
