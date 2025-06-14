@@ -4,8 +4,8 @@ namespace models;
 
 class Cliente{
 
-    public int $id;
-    public string $nome;
+    public int $idCliente;
+    public string $nomeCliente;
     public string $cpf;
     public string $telefone;
 
@@ -16,7 +16,7 @@ class Cliente{
     }
 
     public function getId() : int{
-        return $this->id;
+        return $this->idCliente;
     }
     
 }

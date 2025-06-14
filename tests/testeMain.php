@@ -3,19 +3,29 @@
 namespace tests;
 
 require_once 'C:\xampp\htdocs\PHP_A2\controllers\ReservaController.php';
+require_once 'C:\xampp\htdocs\PHP_A2\controllers\QuadraController.php';
 
 use controllers\ReservaController;
 
+use controllers\QuadraController;
 
-$reservas = ReservaController::consultarReservas();
 
-foreach($reservas as $reserva){
-    echo "id: " . $reserva['clienteId'] . "<br>";
-    echo "nome: " . $reserva['clienteNome'] . "<br>";
-    echo "telefone: " . $reserva['clienteTelefone'] . "<br>" ;
-    echo "data da reserva: " . $reserva['reservaData'] . "<br>";
-    echo "quadra id: " . $reserva['quadraId'] . "<br><br>";
+$quadras = QuadraController::mostrarQuadras();
+
+foreach($quadras as $quadra){
+    echo "id: " . $quadra['idQuadra'] . "<br>";
+    echo "nome: " . $quadra['nomeQuadra'] . "<br>";
+    echo "tipo: " . $quadra['tipo'] . "<br>" ;
+    echo "valorHora: " . ($quadra['valorHora']/100) . "<br>";
 }
+
+?>
+
+<p>___________________________________________________________________</p>
+
+<?php
+
+$quadra2 = QuadraController::mostrarQuadraPorId()
 
 ?>
 

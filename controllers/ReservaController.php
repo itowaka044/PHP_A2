@@ -19,7 +19,7 @@
 
         public static function index(){
 
-            Quadra::criarQuadrasDb();
+            // Quadra::criarQuadrasDb();
 
             Header("Location: /PHP_A2/tests/testeMain.php");
 
