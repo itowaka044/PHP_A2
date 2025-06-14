@@ -42,7 +42,9 @@ match($pagina){
     'reserva/desmarcar' => ReservaController::desmarcarReserva(),
     'reserva/editar'    => ReservaController::editarReserva(),
 
-    '' => ReservaController::index(),
+    'consultar_reserva' => include __DIR__ . '/views/consultar_reserva.php',
+
+    '' => HomeController::home(),
 
     default => ReservaController::index()
 };
