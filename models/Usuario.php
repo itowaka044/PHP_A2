@@ -40,5 +40,10 @@ class Usuario {
             return false;
         }
     }
+
+    // Estrutura para cadastro de usuário (sem implementação)
+    public static function cadastrar($usuario, $senha, $cpf, $dataNascimento) {
+        // Implementação futura
+    }
 }
 ?>

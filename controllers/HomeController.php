@@ -1,6 +1,11 @@
 <?php
     class HomeController{
 
+    public static function home() {
+        session_start();
+        include_once __DIR__ . '/../views/home.php';
+    }    
+
     public static function login() {
         require_once __DIR__ . '/../models/Usuario.php';
         require_once __DIR__ . '/../DbConfig.php';

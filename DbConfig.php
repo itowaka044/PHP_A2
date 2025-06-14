@@ -8,7 +8,7 @@ class DbConfig {
         if (!self::$conn) {
 
             $user = 'root';
-            $pass = '';
+            $pass = '123';
 
             try {
 
