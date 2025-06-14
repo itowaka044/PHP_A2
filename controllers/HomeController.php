@@ -18,9 +18,8 @@
             $senha = $_POST['password'] ?? null;
             $cpf = $_POST['cpf'] ?? null;
             $dataNascimento = $_POST['data_nascimento'] ?? null;
-            $email = $_POST['email'] ?? null;
             $passwordHash = password_hash($senha, PASSWORD_DEFAULT);
-            session_start();
+            
             $erros = [];            
 
             if (!Validador::validarCPF($cpf)) {
