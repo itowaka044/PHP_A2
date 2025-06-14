@@ -41,9 +41,24 @@ class Usuario {
         }
     }
 
-    // Estrutura para cadastro de usuário (sem implementação)
-    public static function cadastrar($usuario, $senha, $cpf, $dataNascimento) {
-        // Implementação futura
+    public static function cadastrar($usuario, $senhaHash, $cpf, $dataNascimento) {
+        try {
+            $db = DbConfig::getConn();
+            
+            $sql = "INSERT INTO usuarios (nome_usuario, senha, cpf, data_nascimento) 
+                    VALUES (:usuario, :senha, :cpf, :data_nascimento)";
+            
+            $stmt = $db->prepare($sql);
+            $stmt->bindParam(':usuario', $usuario);
+            $stmt->bindParam(':senha', $senhaHash);
+            $stmt->bindParam(':cpf', $cpf);
+            $stmt->bindParam(':data_nascimento', $dataNascimento);
+            
+            return $stmt->execute();
+        } catch (PDOException $e) {
+            error_log("Erro ao cadastrar usuário: " . $e->getMessage());
+            return false;
+        }
     }
 }
 ?>
