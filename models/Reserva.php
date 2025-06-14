@@ -12,19 +12,15 @@ use DbConfig;
 
 class Reserva{
 
-    public int $id;
+    public int $idReserva;
     
-    public Cliente $cliente;
+    public int $idCliente;
 
-    public string $data;
+    public int $idHorario;
 
-    public string $horaInicio;
-
-    public string $horaFim;
-
-    public Quadra $quadra;
-
-    public bool $reservado;
+    public int $idQuadra;
+    public string $dataReserva;
+    public bool $statusReserva;
     
 
     public function __construct(Cliente $cliente, string $data){
@@ -33,13 +29,13 @@ class Reserva{
     }
 
 
-    private static function reservarQuadra($quadraId){
+    private static function reservarQuadra($idQuadra){
 
         $db = DbConfig::getConn();
 
         $statement = $db->prepare("update reservado set reservado = true where quadraId = :id");
 
-        $statement->bindParam(":id", $quadraId, PDO::PARAM_INT);
+        $statement->bindParam(":id", $idQuadra, PDO::PARAM_INT);
 
     }
 
@@ -54,7 +50,7 @@ class Reserva{
         return $statement;
     }
 
-   public static function marcarReserva(Cliente $cliente, string $data, $quadraId){
+   public static function marcarReserva(Cliente $cliente, string $data, $idQuadra){
        $reserva = new Reserva($cliente, $data);
 
        $db = DbConfig::getConn();
@@ -71,14 +67,14 @@ class Reserva{
        $statement->bindValue(":clienteCpf", $reserva->cliente->cpf);
        $statement->bindValue(":clienteTelefone", $reserva->cliente->telefone);
        $statement->bindValue(":reservaData", $data);
-       $statement->bindValue(":quadraId", $quadraId);
+       $statement->bindValue(":quadraId", $idQuadra);
 
 
-       $isReservada = self::quadraEstaReservada($quadraId);
+       $isReservada = self::quadraEstaReservada($idQuadra);
 
        if($isReservada){
 
-           self::reservarQuadra($quadraId);
+           self::reservarQuadra($idQuadra);
 
            return $statement->execute();
 

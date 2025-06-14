@@ -6,13 +6,13 @@ use DbConfig;
 
 class Quadra{
 
-    public int $id;
+    public int $idQuadra;
 
-    public string $nome;
+    public string $nomeQuadra;
 
     public string $tipo;
-
-    public bool $reservado;
+    
+    public int $valorHora;
 
     public function __construct(string $nome, string $tipo, bool $reservado){
         $this->nome = $nome;
@@ -21,7 +21,7 @@ class Quadra{
     }
 
     public function getId(): int{
-        return $this->id;
+        return $this->idQuadra;
     }
 
     public static function criarQuadrasDb(){
