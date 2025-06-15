@@ -19,9 +19,7 @@
 
         public static function index(){
 
-            // Quadra::criarQuadrasDb();
-
-            Header("Location: /PHP_A2/tests/testeMain.php");
+            Header("Location: /PHP_A2/views/logar.php");
 
         }
 
@@ -30,15 +28,13 @@
             if($_SERVER['REQUEST_METHOD'] == "GET"){
 
                 $idHorario = $_GET['idHorario'] ?? null;
-                $idCliente = $_GET['idCliente'] ?? null;
+                $idUsuario = $_GET['idUsuario'] ?? null;
                 $idQuadra = $_GET['idQuadra'] ?? null;
 
-            
 
                 try{
 
-                    Reserva::criarReserva($idHorario, $idCliente, $idQuadra);
-
+                    Reserva::criarReserva($idHorario, $idUsuario, $idQuadra);
                     
 
                 } catch (Exception $exception){
@@ -49,6 +45,29 @@
 
                 }
             }
+        }
+
+        public static function processarReserva(){
+
+            if(!isset($_SESSION)){
+                session_start();
+            }
+
+            $idUsuario = $_SESSION['idUsuario'];
+
+            if ($_SERVER['REQUEST_METHOD'] == "POST") {
+
+                $idHorario = $_POST['idHorario'] ?? null;
+                $idQuadra = $_POST['idQuadra'];
+
+                header("Location: /PHP_A2/views/reservado.php?idHorario=" . urlencode($idHorario) . "&idUsuario=" . urlencode($idUsuario) . "&idQuadra=" . urlencode($idQuadra) );
+                die();
+            
+            } else {
+                header('Location: /PHP_A2/views/selecionar.php');
+                die();
+            }
+
         }
 
         // public static function marcarReserva(){

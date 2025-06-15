@@ -29,7 +29,7 @@ class Reserva{
         $this->data = $data;
     }
 
-        public static function criarReserva($idHorario, $idCliente, $idQuadra){
+        public static function criarReserva($idHorario, $idUsuario, $idQuadra){
         $db = Dbconfig::getConn();
 
         try{
@@ -52,8 +52,8 @@ class Reserva{
             }
 
             $statement = $db->prepare(
-                "insert into reserva(idHorario, idCliente, dataReserva, statusReserva, idQuadra)
-                values (:idHorario, :idCliente, :dataReserva, :statusReserva, :idQuadra)"
+                "insert into reserva(idHorario, idUsuario, dataReserva, statusReserva, idQuadra)
+                values (:idHorario, :idUsuario, :dataReserva, :statusReserva, :idQuadra)"
             );
 
             $reservouEm = date("Y-m-d");
@@ -61,7 +61,7 @@ class Reserva{
             $status = false;
 
             $statement->bindParam(':idHorario', $idHorario, PDO::PARAM_INT);
-            $statement->bindParam(':idCliente', $idCliente, PDO::PARAM_INT);
+            $statement->bindParam(':idUsuario', $idUsuario, PDO::PARAM_INT);
             $statement->bindParam(':dataReserva', $reservouEm, PDO::PARAM_STR);
             $statement->bindParam(':statusReserva', $status, PDO::PARAM_BOOL);
             $statement->bindParam(":idQuadra", $idQuadra, PDO::PARAM_INT);

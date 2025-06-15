@@ -5,8 +5,8 @@
     <p>senha</p>
     <input type="password" name="senhaUsuario">
 
-    <p>data nascimento</p>
-    <input type="date" name="dataNascimento">
+    <p>email</p>
+    <input type="text" name="emailUsuario">
 
     <p>cpf</p>
     <input type="text" name="cpfUsuario">

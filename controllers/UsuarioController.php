@@ -18,16 +18,17 @@ class UsuarioController{
             $senhaHash = password_hash($senha, PASSWORD_DEFAULT);
 
             $cpf = $_POST['cpfUsuario'];
-            $dataNasc = $_POST['dataNascimento'];
+            $email = $_POST['emailUsuario'];
             $telefone = $_POST['telefoneUsuario'];
 
             try{
 
-                $sucesso = Usuario::cadastrarUsuario($usuario, $senhaHash, $cpf, $dataNasc, $telefone);
+                $sucesso = Usuario::cadastrarUsuario($usuario, $senhaHash, $cpf, $email, $telefone);
 
                 if($sucesso){
 
-                    echo "sucesso";
+                    Header("Location: /PHP_A2/views/logar.php");
+                    die();
 
                 }
 
@@ -35,9 +36,7 @@ class UsuarioController{
                 echo "erro: " . $ex->getMessage() . "<br>";
             }
         }
-
     }
-
 
 
     public static function fazerLogin(){
@@ -67,7 +66,7 @@ class UsuarioController{
             $_SESSION['idUsuario'] = $usuario["idUsuario"];
             $_SESSION['nomeUsuario'] = $usuario['nomeUsuario'];
 
-            echo "logado com sucesso";
+            Header("Location: /PHP_A2/views/selecionar.php");
 
         } else{
 
@@ -76,7 +75,7 @@ class UsuarioController{
     }
 
     public static function fazerLogout(){
-        
+
         if(!isset($_SESSION)){
             session_start();
         }
@@ -91,6 +90,5 @@ class UsuarioController{
     }
 
 }
-
 
 ?>

@@ -28,19 +28,22 @@ class Usuario {
         }
     }
 
-    public static function cadastrarUsuario($usuario, $senhaHash, $cpf, $dataNascimento, $telefone) {
+    public static function cadastrarUsuario($usuario, $senhaHash, $cpf, $email, $telefone) {
+
         try {
+
             $db = DbConfig::getConn();
             
-            $stmt = $db->prepare("INSERT INTO usuario (nomeUsuario, senhaUsuario, cpfUsuario, dataNascimento, telefoneUsuario) 
-                VALUES (:usuario, :senha, :cpf, :dataNascimento, :tel)");
-            $stmt->bindParam(':usuario', $usuario, PDO::PARAM_STR);
-            $stmt->bindParam(':senha', $senhaHash, PDO::PARAM_STR);
-            $stmt->bindParam(':cpf', $cpf, PDO::PARAM_STR);
-            $stmt->bindParam(':dataNascimento', $dataNascimento, PDO::PARAM_STR);
-            $stmt->bindParam(':tel', $telefone , PDO::PARAM_STR);
+            $statement = $db->prepare("INSERT INTO usuario (nomeUsuario, senhaUsuario, cpfUsuario, emailUsuario, telefoneUsuario) 
+                VALUES (:usuario, :senha, :cpf, :email, :tel)");
+
+            $statement->bindParam(':usuario', $usuario, PDO::PARAM_STR);
+            $statement->bindParam(':senha', $senhaHash, PDO::PARAM_STR);
+            $statement->bindParam(':cpf', $cpf, PDO::PARAM_STR);
+            $statement->bindParam(':email', $email, PDO::PARAM_STR);
+            $statement->bindParam(':tel', $telefone , PDO::PARAM_STR);
             
-            if (!$stmt->execute()) {
+            if (!$statement->execute()) {
                 throw new Exception("erro ao cadastrar");
             }
             return true;
@@ -49,10 +52,6 @@ class Usuario {
 
             echo "erro: " . $ex->getMessage() . "<br>";
         }
-    }
-
-    public static function fazerLogin($usuario, $senha){
-
     }
 }
 ?>

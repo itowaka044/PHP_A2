@@ -1,6 +1,5 @@
 <?php
 
-require_once __DIR__ . '/controllers/HomeController.php';
 require_once __DIR__ . '/controllers/ReservaController.php';
 require_once __DIR__ . '/models/Cliente.php';
 require_once __DIR__ . '/models/Reserva.php';
@@ -36,13 +35,11 @@ match($pagina){
     'usuario/login'     => UsuarioController::fazerLogin(),
     'usuario/logout'    => UsuarioController::fazerLogout(),
 
-    'reserva/consultar' => ReservaController::consultarReservas(),
-    'reserva/consultar-id' => ReservaController::consultarReservaPorId(),
-    'reserva/desmarcar' => ReservaController::desmarcarReserva(),
-    'reserva/editar'    => ReservaController::editarReserva(),
-
-
+    'horario/processar-horario' =>HorarioController::processarHorario(),
     'horario/consultar-disp' => HorarioController::consultarHorarioDisp(),
+
+    'reserva/criar-reserva' => ReservaController::criarReserva(),
+    'reserva/processar-reserva' => ReservaController::processarReserva(),
 
     '' => ReservaController::index(),
 

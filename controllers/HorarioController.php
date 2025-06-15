@@ -33,8 +33,6 @@
         }
 
         public static function consultarHorarioDisp(){
-            
-            require_once "C:\\xampp\htdocs\PHP_A2\\tests\\testeConsultarHorarioQuadra.php";
 
             $idQuadra = $_GET['id'] ?? null;
             $dataHorario = $_GET['date'] ?? null;
@@ -49,9 +47,25 @@
                 echo "erro: " . $ex->getMessage() . "<br>";
             }
 
+
         }
 
+        public static function processarHorario(){
 
+            if ($_SERVER['REQUEST_METHOD'] == "POST") {
+
+                $idQuadra = $_POST['id'] ?? null;
+                $dataHorario = $_POST['date'] ?? null;
+
+                header("Location: /PHP_A2/views/horarios.php?id=" . urlencode($idQuadra) . "&date=" . urlencode($dataHorario));
+                die();
+            
+            } else {
+                header('Location: /PHP_A2/views/selecionar.php');
+                die();
+            }
+
+        }
     }
 
 ?>
