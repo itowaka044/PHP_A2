@@ -5,7 +5,11 @@ require_once __DIR__ . '/controllers/ReservaController.php';
 require_once __DIR__ . '/models/Cliente.php';
 require_once __DIR__ . '/models/Reserva.php';
 require_once __DIR__ . '/DbConfig.php';
+require_once __DIR__ . '/controllers/HorarioController.php';
+require_once __DIR__ . '/controllers/UsuarioController.php';
 
+use controllers\UsuarioController;
+use controllers\HorarioController;
 use controllers\ReservaController;
 
 $uri = $_SERVER['REQUEST_URI'];
@@ -28,17 +32,18 @@ match($pagina){
 
     'teste'    => ReservaController::index(),
 
-    'login'     => HomeController::login(),
-    'logout'    => HomeController::logout(),
+    'usuario/cadastrar' => UsuarioController::cadastrarUsuario(),
+    'usuario/login'     => UsuarioController::fazerLogin(),
+    
+    'usuario/logout'    => UsuarioController::fazerLogout(),
 
-    'reserva/marcar'  => ReservaController::marcarReserva(),
     'reserva/consultar' => ReservaController::consultarReservas(),
     'reserva/consultar-id' => ReservaController::consultarReservaPorId(),
     'reserva/desmarcar' => ReservaController::desmarcarReserva(),
     'reserva/editar'    => ReservaController::editarReserva(),
 
 
-    'horario/consultar-disp' => HorarioController::
+    'horario/consultar-disp' => HorarioController::consultarHorarioDisp(),
 
     '' => ReservaController::index(),
 

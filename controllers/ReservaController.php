@@ -51,32 +51,32 @@
             }
         }
 
-        public static function marcarReserva(){
+        // public static function marcarReserva(){
 
-            if($_SERVER['REQUEST_METHOD'] == "POST"){
+        //     if($_SERVER['REQUEST_METHOD'] == "POST"){
 
-                $nome = $_POST['clienteNome'];
-                $cpf = $_POST['clienteCpf'];
-                $telefone = $_POST['clienteTelefone'];
-                $data = $_POST['reservaData'];
-                $quadraId = $_POST['quadraId'];
+        //         $nome = $_POST['clienteNome'];
+        //         $cpf = $_POST['clienteCpf'];
+        //         $telefone = $_POST['clienteTelefone'];
+        //         $data = $_POST['reservaData'];
+        //         $quadraId = $_POST['quadraId'];
                 
-                try{
+        //         try{
 
-                    $cliente = new Cliente($nome, $cpf, $telefone);
+        //             $cliente = new Cliente($nome, $cpf, $telefone);
                     
-                    Reserva::marcarReserva($cliente, $data, $quadraId);
+        //             Reserva::marcarReserva($cliente, $data, $quadraId);
 
-                    Header("Location: /PHP_A2/tests/testReservaConfirmada.php");
-                    die;
+        //             Header("Location: /PHP_A2/tests/testReservaConfirmada.php");
+        //             die;
 
-                } catch (Exception $exception){
+        //         } catch (Exception $exception){
 
-                    echo "erro: " . $exception->getMessage() . "<br>";
+        //             echo "erro: " . $exception->getMessage() . "<br>";
 
-                }
-            }
-        }
+        //         }
+        //     }
+        // }
 
         public static function consultarReservas(){
 

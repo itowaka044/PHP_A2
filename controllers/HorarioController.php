@@ -34,7 +34,8 @@
 
         public static function consultarHorarioDisp(){
             
-            
+            require_once "C:\\xampp\htdocs\PHP_A2\\tests\\testeConsultarHorarioQuadra.php";
+
             $idQuadra = $_GET['id'] ?? null;
             $dataHorario = $_GET['date'] ?? null;
 
