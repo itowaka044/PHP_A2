@@ -34,7 +34,6 @@ match($pagina){
 
     'usuario/cadastrar' => UsuarioController::cadastrarUsuario(),
     'usuario/login'     => UsuarioController::fazerLogin(),
-    
     'usuario/logout'    => UsuarioController::fazerLogout(),
 
     'reserva/consultar' => ReservaController::consultarReservas(),

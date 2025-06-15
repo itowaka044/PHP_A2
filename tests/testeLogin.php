@@ -1,4 +1,4 @@
-<form method ="post">
+<form method ="post" action="/PHP_A2/usuario/login">
     <p>nome usuario</p>
     <input type="text" name="nomeUsuario" required>
     <br>

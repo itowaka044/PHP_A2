@@ -38,37 +38,45 @@ class UsuarioController{
 
     }
 
+
+
     public static function fazerLogin(){
 
         if(!isset($_SESSION)){
             session_start();
         }
-
-        require_once "C:\\xampp\htdocs\PHP_A2\\tests\\testeLogin.php";
-
-        $nomeUsuario = $_POST['nomeUsuario'];
-        $senhaUsuario = $_POST['senhaUsuario'];
+        $nomeUsuario = $_POST['nomeUsuario'] ?? "";
+        $senhaUsuario = $_POST['senhaUsuario'] ?? "";
 
         if(empty($nomeUsuario) || empty($senhaUsuario)){
+
             echo "insira os dados corretamente";
-
+            return;
         }
+        try{
 
-        $usuario = Usuario::buscarUsuario($nomeUsuario);
+            $usuario = Usuario::buscarUsuario($nomeUsuario);
 
-        if($usuario && password_verify($senhaUsuario, $usuario["senhaUsuario"])){
+        }catch(Exception $ex){
+
+            echo "erro: " . $ex->getMessage() . "<br>"; 
+            return;
+        }
+        if(password_verify($senhaUsuario, $usuario["senhaUsuario"])){
+
             $_SESSION['idUsuario'] = $usuario["idUsuario"];
             $_SESSION['nomeUsuario'] = $usuario['nomeUsuario'];
 
             echo "logado com sucesso";
 
         } else{
+
             echo "dados invalidos";
         }
-
     }
 
     public static function fazerLogout(){
+        
         if(!isset($_SESSION)){
             session_start();
         }
@@ -76,7 +84,9 @@ class UsuarioController{
         $_SESSION = [];
 
         session_destroy();
-        die;
+
+
+        die();
 
     }
 

@@ -19,7 +19,7 @@ class Usuario {
             $statement->bindParam(":nome", $nomeUsuario, PDO::PARAM_STR);
             $statement->execute();
 
-            return $statement->fetch();
+            return $statement->fetch(PDO::FETCH_ASSOC);
             
 
         } catch(Exception $ex) {
