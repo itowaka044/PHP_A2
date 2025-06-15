@@ -102,6 +102,7 @@ class Horario{
             $statement =  $db->prepare(
                 "select 
                 h.idHorario,
+                h.idQuadra,
                 h.dataHorario,
                 h.horaInicio,
                 h.horaFim
@@ -110,7 +111,7 @@ class Horario{
                 horario h
 
                 left join
-                reserva r on h.idHorario = r.idHorario and r.statusReserva != 'cancelada'
+                reserva r on h.idHorario = r.idHorario and r.statusReserva = 0
 
                 where
                 h.idQuadra = :idQuadra and h.dataHorario = :dataHorario and r.idReserva is null"

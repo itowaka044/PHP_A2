@@ -18,11 +18,41 @@
     $horarios = HorarioController::consultarHorarioDisp();
     
     foreach($horarios as $horario){
-        echo "idHorario: " . $horario["idHorario"] . "<BR>";
-        echo "dataHorario: " . $horario["dataHorario"] . "<BR>";
-        echo "horaInicio: " . $horario["horaInicio"] . "<BR>";
-        echo "horaFim: " . $horario["horaFim"] . "<BR>";
-        echo "<Br><br>";
+        echo "idHorario: " . $horario["idHorario"] . "<BR>"
+        . "idQuadra: " . $horario["idQuadra"] . "<BR>"
+        . "dataHorario: " . $horario["dataHorario"] . "<BR>"
+        . "horaInicio: " . $horario["horaInicio"] . "<BR>"
+        . "horaFim: " . $horario["horaFim"] . "<BR>"
+        . "
+        <Br><br>";
     }
+
+?>
+
+<p>____________________________________________________________</p>
+
+<form method="get">
+    <p>idHorario</p>
+    <input type="number" name="idHorario">
+    <br>
+    <p>idCliente</p>
+    <input type="number" name="idCliente">
+    <br>
+    <p>quadra id:</p>
+    <input type="number" name="idQuadra">
+    <br>
+    <input type="submit">
+    <br>
+
+</form>
+
+<?php
+
+    require_once "C:\\xampp\htdocs\PHP_A2\controllers\ReservaController.php";
+
+    use controllers\ReservaController;
+
+    ReservaController::criarReserva();
+
 
 ?>

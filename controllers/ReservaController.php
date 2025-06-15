@@ -25,6 +25,32 @@
 
         }
 
+        public static function criarReserva(){
+
+            if($_SERVER['REQUEST_METHOD'] == "GET"){
+
+                $idHorario = $_GET['idHorario'] ?? null;
+                $idCliente = $_GET['idCliente'] ?? null;
+                $idQuadra = $_GET['idQuadra'] ?? null;
+
+            
+
+                try{
+
+                    Reserva::criarReserva($idHorario, $idCliente, $idQuadra);
+
+                    
+
+                } catch (Exception $exception){
+
+                    echo "erro: " . $exception->getMessage() . "<br>";
+                    echo 
+                    "erro ao criar reserva";
+
+                }
+            }
+        }
+
         public static function marcarReserva(){
 
             if($_SERVER['REQUEST_METHOD'] == "POST"){

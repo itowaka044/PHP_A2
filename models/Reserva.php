@@ -4,6 +4,7 @@ namespace models;
 
 require_once __DIR__ . "/../DbConfig.php";
 
+use Exception;
 use models\Cliente;
 
 use PDO;
@@ -28,6 +29,52 @@ class Reserva{
         $this->data = $data;
     }
 
+        public static function criarReserva($idHorario, $idCliente, $idQuadra){
+        $db = Dbconfig::getConn();
+
+        try{
+
+            $testeStatement = $db->prepare(
+                "select h.idHorario
+                from horario h
+                
+                left join 
+                reserva r on h.idHorario = r.idHorario and r.statusReserva
+                where h.idHorario = :idHorario and r.idReserva is null"
+            );
+
+            $testeStatement->bindParam(":idHorario" , $idHorario, PDO::PARAM_INT);
+            $testeStatement->execute();
+
+            if($testeStatement->rowCount() == 0){
+                echo "sem horarios para exibir";
+                return false;
+            }
+
+            $statement = $db->prepare(
+                "insert into reserva(idHorario, idCliente, dataReserva, statusReserva, idQuadra)
+                values (:idHorario, :idCliente, :dataReserva, :statusReserva, :idQuadra)"
+            );
+
+            $reservouEm = date("Y-m-d");
+
+            $status = false;
+
+            $statement->bindParam(':idHorario', $idHorario, PDO::PARAM_INT);
+            $statement->bindParam(':idCliente', $idCliente, PDO::PARAM_INT);
+            $statement->bindParam(':dataReserva', $reservouEm, PDO::PARAM_STR);
+            $statement->bindParam(':statusReserva', $status, PDO::PARAM_BOOL);
+            $statement->bindParam(":idQuadra", $idQuadra, PDO::PARAM_INT);
+
+            return $statement->execute();
+
+        }catch(Exception $ex){
+            echo "erro: " . $ex->getMessage() . "<br>";
+            return false;
+        }
+
+    }
+
     private static function reservarQuadra($idQuadra){
 
         $db = DbConfig::getConn();
@@ -48,40 +95,6 @@ class Reserva{
 
         return $statement;
     }
-
-   public static function marcarReserva(Cliente $cliente, string $data, $idQuadra){
-       $reserva = new Reserva($cliente, $data);
-
-       $db = DbConfig::getConn();
-
-       //var_dump($db);
-
-       $statement = $db->prepare("insert into reservas(clienteNome, clienteCpf, clienteTelefone , reservaData, quadraId) 
-       values (:clienteNome, :clienteCpf, :clienteTelefone, :reservaData, :quadraId)");
-
-       // var_dump($statement);
-       // die;
-
-       $statement->bindValue(":clienteNome", $reserva->cliente->nome);
-       $statement->bindValue(":clienteCpf", $reserva->cliente->cpf);
-       $statement->bindValue(":clienteTelefone", $reserva->cliente->telefone);
-       $statement->bindValue(":reservaData", $data);
-       $statement->bindValue(":quadraId", $idQuadra);
-
-
-       $isReservada = self::quadraEstaReservada($idQuadra);
-
-       if($isReservada){
-
-           self::reservarQuadra($idQuadra);
-
-           return $statement->execute();
-
-       }
-
-       return false;
-    
-   }
 
     public static function consultarReserva(){
 

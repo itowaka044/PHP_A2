@@ -34,8 +34,9 @@
 
         public static function consultarHorarioDisp(){
             
-            $idQuadra = $_GET['id'];
-            $dataHorario = $_GET['date'];
+            
+            $idQuadra = $_GET['id'] ?? null;
+            $dataHorario = $_GET['date'] ?? null;
 
             try{
 
