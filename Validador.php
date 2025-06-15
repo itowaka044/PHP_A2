@@ -42,7 +42,7 @@ class Validador {
             return false;
         }
 
-        if ($idade > 120 || $idade < 10) {
+        if ($idade > 120 && $idade < 10) {
             return false;
         }
 

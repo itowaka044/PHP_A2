@@ -15,7 +15,7 @@ class Usuario {
                 header('Location: login');
             }
 
-            $sql = "SELECT * FROM usuarios WHERE nome_usuario = :usuario LIMIT 1";
+            $sql = "SELECT * FROM cliente WHERE nomeCliente = :usuario LIMIT 1";
             $statement = $db->prepare($sql);
             $statement->bindParam(':usuario', $usuario, PDO::PARAM_STR);
             $statement->execute();
@@ -41,20 +41,21 @@ class Usuario {
         }
     }
 
-    public static function cadastrar($usuario, $senhaHash, $cpf, $dataNascimento) {
+    public static function cadastrar($usuario, $senhaHash, $cpf, $dataNascimento, $telefone) {
         try {
             $db = DbConfig::getConn();
             
-            $sql = "INSERT INTO usuarios (nome_usuario, senha, cpf, data_nascimento) 
-                    VALUES (:usuario, :senha, :cpf, :data_nascimento)";
+            $sql = "INSERT INTO cliente (nomeCliente, senha, cpf, data_nascimento, telefone) 
+                    VALUES (:usuario, :senha, :cpf, :data_nascimento, :telefone)";
             
-            $stmt = $db->prepare($sql);
-            $stmt->bindParam(':usuario', $usuario);
-            $stmt->bindParam(':senha', $senhaHash);
-            $stmt->bindParam(':cpf', $cpf);
-            $stmt->bindParam(':data_nascimento', $dataNascimento);
+            $statement = $db->prepare($sql);
+            $statement->bindParam(':usuario', $usuario);
+            $statement->bindParam(':senha', $senhaHash);
+            $statement->bindParam(':cpf', $cpf);
+            $statement->bindParam(':data_nascimento', $dataNascimento);
+            $statement->bindParam(':telefone', $telefone);
             
-            return $stmt->execute();
+            return $statement->execute();
         } catch (PDOException $e) {
             error_log("Erro ao cadastrar usuário: " . $e->getMessage());
             return false;

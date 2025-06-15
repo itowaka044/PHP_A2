@@ -12,12 +12,14 @@
     require_once __DIR__ . '/../models/Usuario.php';
     require_once __DIR__ . '/../DbConfig.php';
     require_once __DIR__ . '/../Validador.php';
+    session_start();
     
     if($_SERVER['REQUEST_METHOD'] === 'POST') {
         $usuario = $_POST['username'] ?? null;
         $senha = $_POST['password'] ?? null;
         $cpf = $_POST['cpf'] ?? null;
         $dataNascimento = $_POST['data_nascimento'] ?? null;
+        $telefone = $_POST['telefone'] ?? null;
         
         $erros = [];
         
@@ -37,7 +39,7 @@
 
             $senhaHash = password_hash($senha, PASSWORD_DEFAULT);
 
-            if(Usuario::cadastrar($usuario, $senhaHash, $cpf, $dataNascimento)) {
+            if(Usuario::cadastrar($usuario, $senhaHash, $cpf, $dataNascimento, $telefone)) {
                 $_SESSION['success'] = "Usuário cadastrado com sucesso!";
                 header("Location: login");
                 exit;
