@@ -44,3 +44,9 @@ CREATE TABLE Reserva (
     FOREIGN KEY (idHorario) REFERENCES Horario(idHorario),
     FOREIGN KEY (idQuadra) REFERENCES Quadra(idQuadra)
 );
+
+______________________________________________________
+
+ALTER TABLE horario
+ADD CONSTRAINT unico_horario_quadra_data_inicio
+UNIQUE (idQuadra, dataHorario, horaInicio);

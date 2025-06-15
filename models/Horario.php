@@ -91,6 +91,41 @@ class Horario{
             echo "erro: " . $ex->getMessage() . "<br>";
             return 0;
         }
+    }
+
+    public static function consultarHorariosDisp($idQuadra, $dataHorario){
+
+        $db = DbConfig::getConn();
+
+        try{            
+
+            $statement =  $db->prepare(
+                "select 
+                h.idHorario,
+                h.dataHorario,
+                h.horaInicio,
+                h.horaFim
+
+                from
+                horario h
+
+                left join
+                reserva r on h.idHorario = r.idHorario and r.statusReserva != 'cancelada'
+
+                where
+                h.idQuadra = :idQuadra and h.dataHorario = :dataHorario and r.idReserva is null"
+
+            );
+
+            $statement->bindParam(":idQuadra", $idQuadra , PDO::PARAM_INT);
+            $statement->bindParam(":dataHorario", $dataHorario, PDO::PARAM_STR);
+
+            $statement->execute();
+
+            return $statement->fetchAll();
+        }catch(Exception $ex){
+            echo "erro: " . $ex->getMessage() . "<br>";
+        }
 
     }
 

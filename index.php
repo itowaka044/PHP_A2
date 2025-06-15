@@ -37,6 +37,9 @@ match($pagina){
     'reserva/desmarcar' => ReservaController::desmarcarReserva(),
     'reserva/editar'    => ReservaController::editarReserva(),
 
+
+    'horario/consultar-disp' => HorarioController::
+
     '' => ReservaController::index(),
 
     default => ReservaController::index()

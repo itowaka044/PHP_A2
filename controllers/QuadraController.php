@@ -23,9 +23,11 @@ class QuadraController{
 
     }
     
-    public static function mostrarQuadraPorId($id){
+    public static function mostrarQuadraPorId(){
 
         try{
+
+            $id = $_GET["id"];
 
             $quadra = Quadra::mostrarQuadraPorId($id);
 

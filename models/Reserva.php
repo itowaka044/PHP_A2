@@ -28,7 +28,6 @@ class Reserva{
         $this->data = $data;
     }
 
-
     private static function reservarQuadra($idQuadra){
 
         $db = DbConfig::getConn();
