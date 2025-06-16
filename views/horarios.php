@@ -1,4 +1,6 @@
 
+<h1>Horários</h1>
+
 <form action="/PHP_A2/reserva/processar-reserva" method="post">
 
     <p>Selecione o ID do horário:</p>

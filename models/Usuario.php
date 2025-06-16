@@ -53,5 +53,27 @@ class Usuario {
             echo "erro: " . $ex->getMessage() . "<br>";
         }
     }
+
+    public static function resetarSenha($usuario, $cpf, $email, $novaSenha){
+        $db = DbConfig::getConn();
+
+        try{            
+
+            $statement =  $db->prepare("update usuario set senhaUsuario = :novaSenha 
+            where nomeUsuario = :usuario && cpfUsuario = :cpf  && emailUsuario = :email");
+
+            $statement->bindParam(":usuario", $usuario , PDO::PARAM_STR);
+            $statement->bindParam(":cpf", $cpf, PDO::PARAM_STR);
+            $statement->bindParam(":email", $email, PDO::PARAM_STR);
+            $statement->bindParam(":novaSenha", $novaSenha, PDO::PARAM_STR);
+
+            $statement->execute();
+
+            echo "senha alterada";
+
+        }catch(Exception $ex){
+            echo "erro: " . $ex->getMessage() . "<br>";
+        }
+    }
 }
 ?>

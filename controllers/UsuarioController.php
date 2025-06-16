@@ -5,6 +5,8 @@ namespace controllers;
 require_once "C:\\xampp\htdocs\PHP_A2\models\Usuario.php";
 use Exception;
 use models\Usuario;
+use DbConfig;
+use PDO;
 
 class UsuarioController{
 
@@ -89,6 +91,29 @@ class UsuarioController{
 
     }
 
+    public static function resetarSenha(){
+
+        if($_SERVER['REQUEST_METHOD'] == "POST"){
+            $cpf = $_POST['cpfRecup'];
+            $email = $_POST['emailRecup'];
+            $usuario = $_POST['usuarioRecup'];
+            $novaSenha = $_POST['novaSenha'];
+
+            $senhaHash =  password_hash($novaSenha, PASSWORD_DEFAULT);
+
+        try{
+
+            Usuario::resetarSenha($usuario, $cpf, $email, $senhaHash);
+
+        } catch(Exception $ex){
+            echo "erro: " . $ex->getMessage() . "<br>";
+        }
+
+
+
+
+        }
+    }
 }
 
 ?>

@@ -10,6 +10,7 @@
     }
 
 ?>
+<h1>Login</h1>
 
 <form method ="post" action="/PHP_A2/usuario/login">
     <p>Nome de usuário:</p>
@@ -27,3 +28,5 @@
 <br>
 
 <a href="cadastrar.php">cadastrar</a>
+<br>
+<a href="resetarSenha.php">resetar senha</a>

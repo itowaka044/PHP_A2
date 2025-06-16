@@ -3,6 +3,7 @@
         session_start();
     }
 ?>
+<h1>Cadastro</h1>
 
 <form action="/PHP_A2/usuario/cadastrar" method="post">
 
@@ -19,11 +20,11 @@
     <br>
 
     <p>Telefone:</p>
-    <input type="text" name="emailUsuario">
+    <input type="text" name="telefoneUsuario">
     <br>
 
     <p>Email:</p>
-    <input type="text" name="telefoneUsuario">
+    <input type="text" name="emailUsuario">
     <br>
 
     <br>

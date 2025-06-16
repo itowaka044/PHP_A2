@@ -1,7 +1,6 @@
 <?php
 
 require_once __DIR__ . '/controllers/ReservaController.php';
-require_once __DIR__ . '/models/Cliente.php';
 require_once __DIR__ . '/models/Reserva.php';
 require_once __DIR__ . '/DbConfig.php';
 require_once __DIR__ . '/controllers/HorarioController.php';
@@ -34,6 +33,7 @@ match($pagina){
     'usuario/cadastrar' => UsuarioController::cadastrarUsuario(),
     'usuario/login'     => UsuarioController::fazerLogin(),
     'usuario/logout'    => UsuarioController::fazerLogout(),
+    'usuario/reset-senha' =>UsuarioController::resetarSenha(),
 
     'horario/processar-horario' =>HorarioController::processarHorario(),
     'horario/consultar-disp' => HorarioController::consultarHorarioDisp(),
