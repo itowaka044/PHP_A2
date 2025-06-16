@@ -1,12 +1,12 @@
 <?php
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+// ini_set('display_errors', 1);
+// ini_set('display_startup_errors', 1);
+// error_reporting(E_ALL);
 
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
+// if (session_status() === PHP_SESSION_NONE) {
+//     session_start();
+// }
 
 require_once __DIR__ . '/controllers/ReservaController.php';
 require_once __DIR__ . '/models/Reserva.php';
@@ -42,6 +42,7 @@ match($pagina){
     'usuario/login'     => UsuarioController::fazerLogin(),
     'usuario/logout'    => UsuarioController::fazerLogout(),
     'usuario/reset-senha' =>UsuarioController::resetarSenha(),
+    'usuario/logout'    => UsuarioController::logout(),
 
     'horario/processar-horario' =>HorarioController::processarHorario(),
     'horario/consultar-disp' => HorarioController::consultarHorarioDisp(),

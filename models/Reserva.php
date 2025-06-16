@@ -73,63 +73,6 @@ class Reserva{
 
     }
 
-    private static function quadraEstaReservada($quadraId){
-
-        $db = DbConfig::getConn();
-
-        $statement = $db->prepare("select reservado from quadra where quadraId = :id");
-
-        $statement->bindParam(":id", $quadraId, PDO::PARAM_INT);
-
-        return $statement;
-    }
-
-    public static function consultarReserva(){
-
-        $db = DbConfig::getConn();
-        
-        $statement = $db->query("select * from reservas");
-
-        return $statement->fetchAll();
-    }
-
-    public static function consultarReservaPorId($id){
-
-        $db = DbConfig::getConn();
-
-        $statement = $db->prepare("select * from reservas where clienteId = :id");
-
-        $statement->bindParam(':id', $id, PDO::PARAM_INT);
-        
-        $statement->execute();
-
-        return $statement->fetch();
-
-    }
-
-    public static function consultarQuadras($id){
-
-        $db = DbConfig::getConn();
-
-        $statement = $db->prepare("select * from quadra where quadraId = :id");
-
-        $statement->bindparam(':id', $id, PDO::PARAM_INT);
-
-        $statement->execute();
-
-        return $statement->fetch();
-
-    }
-
-    public function editarReserva(){
-
-        return;
-    }
-
-    public function desmarcarReserva($id){
-        $db = DbConfig::getConn();
-        return $db->query("delete from reserva where id='$id')");
-    }
 
 }
 

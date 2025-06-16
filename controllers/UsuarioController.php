@@ -104,6 +104,7 @@ class UsuarioController{
 
         session_destroy();
 
+        echo "logout realizado";
 
         die();
 
