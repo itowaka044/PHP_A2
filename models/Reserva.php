@@ -12,21 +12,9 @@ use PDO;
 use DbConfig;
 
 class Reserva{
+  
 
-    public int $idReserva;
-    
-    public int $idCliente;
-
-    public int $idHorario;
-
-    public int $idQuadra;
-    public string $dataReserva;
-    public bool $statusReserva;
-    
-
-    public function __construct(Cliente $cliente, string $data){
-        $this->cliente = $cliente;
-        $this->data = $data;
+    public function __construct(){
     }
 
         public static function criarReserva($idHorario, $idUsuario, $idQuadra){

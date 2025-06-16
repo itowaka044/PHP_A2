@@ -7,6 +7,12 @@
 
 <form action="/PHP_A2/usuario/cadastrar" method="post">
 
+    <?php
+        require_once "C:\\xampp\htdocs\PHP_A2\csrf\CsrfToken.php";
+        use csrf\CsrfToken;
+        echo CsrfToken::hiddenHtml();
+    ?>
+
     <p>Nome de Usuário:</p>
     <input type="text" name="nomeUsuario">
     <br>

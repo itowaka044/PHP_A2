@@ -7,7 +7,7 @@ use Exception;
 use models\Usuario;
 use DbConfig;
 use PDO;
-
+use csrf\CsrfToken;
 class UsuarioController{
 
     public static function cadastrarUsuario(){
@@ -46,6 +46,7 @@ class UsuarioController{
         if(!isset($_SESSION)){
             session_start();
         }
+
         $nomeUsuario = $_POST['nomeUsuario'] ?? "";
         $senhaUsuario = $_POST['senhaUsuario'] ?? "";
 

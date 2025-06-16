@@ -1,5 +1,11 @@
 <form action="/PHP_A2/horario/processar-horario" method="post">
 
+    <?php
+        require_once "C:\\xampp\htdocs\PHP_A2\csrf\CsrfToken.php";
+        use csrf\CsrfToken;
+        echo CsrfToken::hiddenHtml();
+    ?>
+
     <p>Selecione a quadra:</p>
     <select name="id" id="">
         <option value="1">Quadra A</option>

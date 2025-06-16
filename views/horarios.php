@@ -3,6 +3,12 @@
 
 <form action="/PHP_A2/reserva/processar-reserva" method="post">
 
+    <?php
+        require_once "C:\\xampp\htdocs\PHP_A2\csrf\CsrfToken.php";
+        use csrf\CsrfToken;
+        echo CsrfToken::hiddenHtml();
+    ?>
+
     <p>Selecione o ID do horário:</p>
     <input type="number" name="idHorario">
 

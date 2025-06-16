@@ -9,6 +9,12 @@
 <h1>Resetar senha</h1>
 <form action="/PHP_A2/usuario/reset-senha" method="post">
 
+    <?php
+        require_once "C:\\xampp\htdocs\PHP_A2\csrf\CsrfToken.php";
+        use csrf\CsrfToken;
+        echo CsrfToken::hiddenHtml();
+    ?>
+
     <p>Inisira o Usuario:</p>
     <input type="text" name="usuarioRecup">
     <br>

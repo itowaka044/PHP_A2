@@ -13,6 +13,13 @@
 <h1>Login</h1>
 
 <form method ="post" action="/PHP_A2/usuario/login">
+
+    <?php
+        require_once "C:\\xampp\htdocs\PHP_A2\csrf\CsrfToken.php";
+        use csrf\CsrfToken;
+        echo CsrfToken::hiddenHtml();
+    ?>
+
     <p>Nome de usuário:</p>
     <input type="text" name="nomeUsuario" required>
     <br>
