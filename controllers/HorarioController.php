@@ -14,9 +14,9 @@
 
         public static function gerarHorarios(){
 
-            $idQuadra = 1;
+            $idQuadra = 3;
             $diaInicio = '2025-06-01';
-            $diaFim = '2025-06-01';
+            $diaFim = '2025-06-30';
             $horaInicioDiaria = '09:00:00';
             $horaFimDiaria = '18:00:00';
 
