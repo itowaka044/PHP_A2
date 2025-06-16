@@ -15,8 +15,8 @@
 <form method ="post" action="/PHP_A2/usuario/login">
 
     <?php
-        require_once "C:\\xampp\htdocs\PHP_A2\csrf\CsrfToken.php";
-        use csrf\CsrfToken;
+        require_once "C:\\xampp\htdocs\PHP_A2\security\CsrfToken.php";
+        use security\CsrfToken;
         echo CsrfToken::hiddenHtml();
     ?>
 

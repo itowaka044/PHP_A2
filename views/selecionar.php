@@ -1,8 +1,8 @@
 <form action="/PHP_A2/horario/processar-horario" method="post">
 
     <?php
-        require_once "C:\\xampp\htdocs\PHP_A2\csrf\CsrfToken.php";
-        use csrf\CsrfToken;
+        require_once "C:\\xampp\htdocs\PHP_A2\security\CsrfToken.php";
+        use security\CsrfToken;
         echo CsrfToken::hiddenHtml();
     ?>
 
@@ -16,7 +16,7 @@
 
     <p>Selecione o dia:</p>
     <input type="date" name="date">
-
+<br><br>
     <input type="submit">
 
 </form>

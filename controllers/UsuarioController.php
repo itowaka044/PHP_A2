@@ -5,14 +5,22 @@ namespace controllers;
 require_once "C:\\xampp\htdocs\PHP_A2\models\Usuario.php";
 use Exception;
 use models\Usuario;
-use DbConfig;
-use PDO;
-use csrf\CsrfToken;
+require_once "C:\\xampp\htdocs\PHP_A2\security\CsrfToken.php";
+use security\CsrfToken;
 class UsuarioController{
 
     public static function cadastrarUsuario(){
 
         if($_SERVER['REQUEST_METHOD'] == "POST"){
+
+            $tokenAux = $_POST[CsrfToken::campoOculto] ?? '';
+            if (!CsrfToken::validar($tokenAux)) {
+
+                echo "erro ao validar token";
+
+                Header('Location: C:\xampp\htdocs\PHP_A2\views\index.php');
+                die();
+            }
 
             $usuario = $_POST['nomeUsuario'];
             $senha = $_POST['senhaUsuario'];
@@ -45,6 +53,15 @@ class UsuarioController{
 
         if(!isset($_SESSION)){
             session_start();
+        }
+
+        $tokenAux = $_POST[CsrfToken::campoOculto] ?? '';
+        if (!CsrfToken::validar($tokenAux)) {
+
+            echo "erro ao validar token";
+
+            Header('Location: C:\xampp\htdocs\PHP_A2\views\index.php');
+            die();
         }
 
         $nomeUsuario = $_POST['nomeUsuario'] ?? "";
@@ -95,6 +112,16 @@ class UsuarioController{
     public static function resetarSenha(){
 
         if($_SERVER['REQUEST_METHOD'] == "POST"){
+
+            $tokenAux = $_POST[CsrfToken::campoOculto] ?? '';
+            if (!CsrfToken::validar($tokenAux)) {
+
+                echo "erro ao validar token";
+
+                Header('Location: C:\xampp\htdocs\PHP_A2\views\index.php');
+                die();
+            }
+
             $cpf = $_POST['cpfRecup'];
             $email = $_POST['emailRecup'];
             $usuario = $_POST['usuarioRecup'];

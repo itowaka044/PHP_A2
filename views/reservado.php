@@ -1,5 +1,6 @@
 <?php
 
+    require_once "C:\\xampp\htdocs\PHP_A2\security\CsrfToken.php";
     require_once "C:\\xampp\htdocs\PHP_A2\controllers\ReservaController.php";
 
     use controllers\ReservaController;

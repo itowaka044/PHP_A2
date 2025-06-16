@@ -4,6 +4,8 @@
 
     require_once __DIR__ . '/../models/Reserva.php';
     require_once __DIR__ . '/../models/Quadra.php';
+    require_once "C:\\xampp\htdocs\PHP_A2\security\CsrfToken.php";
+    use security\CsrfToken;
 
     use DbConfig;
 
@@ -26,7 +28,7 @@
         public static function criarReserva(){
 
             if($_SERVER['REQUEST_METHOD'] == "GET"){
-
+               
                 $idHorario = $_GET['idHorario'] ?? null;
                 $idUsuario = $_GET['idUsuario'] ?? null;
                 $idQuadra = $_GET['idQuadra'] ?? null;
@@ -56,6 +58,15 @@
             $idUsuario = $_SESSION['idUsuario'];
 
             if ($_SERVER['REQUEST_METHOD'] == "POST") {
+
+                $tokenAux = $_POST[CsrfToken::campoOculto] ?? '';
+                if (!CsrfToken::validar($tokenAux)) {
+
+                    echo "erro ao validar token";
+
+                    Header('Location: C:\xampp\htdocs\PHP_A2\views\index.php');
+                die();
+                }
 
                 $idHorario = $_POST['idHorario'] ?? null;
                 $idQuadra = $_POST['idQuadra'];

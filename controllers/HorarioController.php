@@ -4,6 +4,9 @@
 
     require_once "C:\\xampp\htdocs\PHP_A2\models\Horario.php";
 
+    require_once "C:\\xampp\htdocs\PHP_A2\security\CsrfToken.php";
+    use security\CsrfToken;
+
     use models\Horario;
     use Exception;
 
@@ -34,17 +37,20 @@
 
         public static function consultarHorarioDisp(){
 
-            $idQuadra = $_GET['id'] ?? null;
-            $dataHorario = $_GET['date'] ?? null;
+            if($_SERVER['REQUEST_METHOD'] == "GET"){
+                
+                $idQuadra = $_GET['id'] ?? null;
+                $dataHorario = $_GET['date'] ?? null;
 
-            try{
+                try{
 
-                $horariosDisp = Horario::consultarHorariosDisp($idQuadra, $dataHorario);
+                    $horariosDisp = Horario::consultarHorariosDisp($idQuadra, $dataHorario);
 
-                return $horariosDisp;
+                    return $horariosDisp;
 
-            }catch(Exception $ex){
-                echo "erro: " . $ex->getMessage() . "<br>";
+                }catch(Exception $ex){
+                    echo "erro: " . $ex->getMessage() . "<br>";
+                }
             }
 
 
@@ -53,6 +59,15 @@
         public static function processarHorario(){
 
             if ($_SERVER['REQUEST_METHOD'] == "POST") {
+
+                $tokenAux = $_POST[CsrfToken::campoOculto] ?? '';
+                if (!CsrfToken::validar($tokenAux)) {
+
+                    echo "erro ao validar token";
+
+                    Header('Location: C:\xampp\htdocs\PHP_A2\views\index.php');
+                    die();
+                }
 
                 $idQuadra = $_POST['id'] ?? null;
                 $dataHorario = $_POST['date'] ?? null;
