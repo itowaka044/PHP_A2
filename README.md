@@ -31,5 +31,5 @@
 
 - Copiar query em "query.sql" para a inserção do banco de dados;
   
-- Entrar na pasta do projeto, ele ira redirecionar automáticamente;
+- Entrar na pasta do projeto, ele ira redirecionar automaticamente;
 

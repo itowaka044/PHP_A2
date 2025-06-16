@@ -34,6 +34,8 @@ include_once __DIR__ . '/includes/header.php';
     </form>
     <div style="text-align:center;margin-top:18px;">
         <A href=cadastrar.php> cadastrar </A>
+        <br>
+        <a href="logout.php">logout</a>
     </div>
 </main>
 <script>

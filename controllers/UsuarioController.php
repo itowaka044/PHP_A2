@@ -76,6 +76,10 @@ class UsuarioController{
 
             $usuario = Usuario::buscarUsuario($nomeUsuario);
 
+            if(!$usuario){
+                $usuario["senhaUsuario"] = null;
+            }
+
         }catch(Exception $ex){
 
             echo "erro: " . $ex->getMessage() . "<br>"; 
