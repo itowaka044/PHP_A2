@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
 
------------------------------------------------start---------------------------------------------------
+-- start --
 -- Banco de dados: `reservador_fut`
 --
 CREATE DATABASE IF NOT EXISTS `reservador_fut` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
@@ -192,7 +192,7 @@ ALTER TABLE `reserva`
   ADD CONSTRAINT `fk_reserva_quadra` FOREIGN KEY (`idQuadra`) REFERENCES `quadra` (`idQuadra`) ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_reserva_usuario` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`idUsuario`) ON UPDATE CASCADE;
 
-  ----------------------------------------------------------end---------------------------------------------------------------
+  -- --end-- --
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
