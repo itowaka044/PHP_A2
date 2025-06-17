@@ -9,7 +9,7 @@
 
 ---
 
-## 👥 Integrantes da Dupla
+## 👥 Integrantes da Equipe
 
 - Francisco Bueno Ghizelini - [chico-bueno](https://github.com/chico-bueno)
 - Guilherme Candida - [guillcodes](https://github.com/guillcodes)
