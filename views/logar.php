@@ -32,7 +32,7 @@ include_once __DIR__ . '/includes/header.php';
 
         <button type="submit" style="background:#207720;color:#fff;padding:12px 0;border:none;border-radius:6px;font-size:1.1rem;font-weight:600;cursor:pointer;transition:background 0.3s;">Entrar</button>
     </form>
-    <div style="text-align:center;margin-top:18px;">
+    <div class="cad-log">
         <A href=cadastrar.php> cadastrar </A>
         <br>
         <a href="logout.php">logout</a>
