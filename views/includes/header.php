@@ -39,7 +39,7 @@
 </head>
 <body>
     <header class="site-header">
-        <div class="site-logo">FutReserva</div>
+        <div class="site-logo"><a style="text-decoration: none; color: black;" href="home.php">FutReserva</a></div>
         <?php if (isset($_SESSION['user_id'])): ?>
             <a href="/PHP_A2/views/logout.php" class="login-link">Logout</a>
         <?php else: ?>
