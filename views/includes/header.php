@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $title ?? 'FutReserva - Sistema de Reservas' ?></title>
     <link rel="stylesheet" href="/PHP_A2/views/public/css/style.css">
+    <link rel="stylesheet" href="/PHP_A2/views/public/css/style2.css">
     <style>
         header.site-header {
             background-color: #fff;
